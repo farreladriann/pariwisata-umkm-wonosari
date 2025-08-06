@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Peta UMKM Wonosari",
-  description: "Direktori dan Peta Lokasi Usaha Mikro Kecil dan Menengah di Wonosari",
+  title: "Peta UMKM & Pariwisata Wonosari",
+  description: "Direktori dan Peta Lokasi UMKM serta Objek Wisata di Wonosari",
 };
 
 export default function RootLayout({

@@ -1,17 +1,31 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import UMKMList from '@/components/UMKMList';
+import LocationDataList from '@/components/LocationDataList';
 import umkmData from '../../koordinat-umkm.json';
+import pariwisataData from '../../koordinat-pariwisata.json';
 
-// Type untuk data UMKM
-interface UMKMData {
+// Type untuk data lokasi
+interface LocationData {
   name: string;
   coordinates: [number, number]; // [longitude, latitude]
+  type?: 'umkm' | 'pariwisata';
 }
 
-// Cast data JSON ke tipe yang benar
-const typedUmkmData: UMKMData[] = umkmData as UMKMData[];
+// Cast data JSON ke tipe yang benar dan tambahkan type
+const typedUmkmData: LocationData[] = umkmData.map(item => ({ 
+  ...item, 
+  coordinates: item.coordinates as [number, number],
+  type: 'umkm' as const 
+}));
+const typedPariwisataData: LocationData[] = pariwisataData.map(item => ({ 
+  ...item, 
+  coordinates: item.coordinates as [number, number],
+  type: 'pariwisata' as const 
+}));
+
+// Gabungkan semua data
+const allLocationData: LocationData[] = [...typedUmkmData, ...typedPariwisataData];
 
 // Dynamic import untuk MapComponent agar tidak error saat SSR
 const MapComponent = dynamic(() => import('@/components/MapComponent'), {
@@ -31,10 +45,10 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-2">
-              Peta UMKM Wonosari
+              Peta UMKM & Pariwisata Wonosari
             </h1>
             <p className="text-lg text-gray-600">
-              Direktori dan Peta Lokasi Usaha Mikro Kecil dan Menengah di Wonosari
+              Direktori dan Peta Lokasi UMKM serta Objek Wisata di Wonosari
             </p>
           </div>
         </div>
@@ -46,14 +60,14 @@ export default function Home() {
           {/* Map Section */}
           <div className="lg:col-span-2">
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Peta Lokasi UMKM</h2>
-              <MapComponent umkmData={typedUmkmData} />
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Peta Lokasi UMKM & Pariwisata</h2>
+              <MapComponent locationData={allLocationData} />
             </div>
           </div>
 
-          {/* UMKM List Section */}
+          {/* List Section */}
           <div className="lg:col-span-1">
-            <UMKMList umkmData={typedUmkmData} />
+            <LocationDataList locationData={allLocationData} />
           </div>
         </div>
       </main>
@@ -61,9 +75,9 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-lg font-semibold mb-2">Peta UMKM Wonosari</p>
+          <p className="text-lg font-semibold mb-2">Peta UMKM & Pariwisata Wonosari</p>
           <p className="text-gray-400">
-            Mendukung pertumbuhan ekonomi lokal melalui digitalisasi UMKM
+            Mendukung pertumbuhan ekonomi lokal melalui digitalisasi UMKM dan promosi pariwisata
           </p>
         </div>
       </footer>
