@@ -7,7 +7,7 @@ import umkmData from '../../koordinat-umkm.json';
 // Type untuk data UMKM
 interface UMKMData {
   name: string;
-  coordinates: [number, number, number];
+  coordinates: [number, number]; // [longitude, latitude]
 }
 
 // Cast data JSON ke tipe yang benar

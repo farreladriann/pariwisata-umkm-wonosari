@@ -1,6 +1,6 @@
 interface UMKMData {
   name: string;
-  coordinates: [number, number, number];
+  coordinates: [number, number]; // [longitude, latitude]
 }
 
 interface UMKMListProps {
@@ -17,9 +17,6 @@ export default function UMKMList({ umkmData }: UMKMListProps) {
             <h4 className="font-medium text-gray-800 capitalize">{umkm.name}</h4>
             <p className="text-sm text-gray-600 mt-1">
               📍 {umkm.coordinates[1].toFixed(6)}, {umkm.coordinates[0].toFixed(6)}
-            </p>
-            <p className="text-xs text-gray-500">
-              Ketinggian: {umkm.coordinates[2].toFixed(1)} meter
             </p>
           </div>
         ))}

@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 
 interface UMKMData {
   name: string;
-  coordinates: [number, number, number]; // [longitude, latitude, altitude]
+  coordinates: [number, number]; // [longitude, latitude]
 }
 
 interface MapComponentProps {
@@ -57,14 +57,11 @@ export default function MapComponent({ umkmData }: MapComponentProps) {
             key={index}
             position={[umkm.coordinates[1], umkm.coordinates[0]]} // [latitude, longitude]
           >
-                        <Popup>
+            <Popup>
               <div className="text-center">
                 <h3 className="font-semibold text-lg capitalize">{umkm.name}</h3>
                 <p className="text-sm text-gray-600 mt-1">
                   Koordinat: {umkm.coordinates[1].toFixed(6)}, {umkm.coordinates[0].toFixed(6)}
-                </p>
-                <p className="text-xs text-gray-500">
-                  Altitude: {umkm.coordinates[2].toFixed(1)}m
                 </p>
               </div>
             </Popup>
