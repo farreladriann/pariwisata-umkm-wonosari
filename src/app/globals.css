@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Custom styles for Leaflet tooltips */
+.marker-tooltip {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: none !important;
+  border-radius: 4px !important;
+  color: white !important;
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.marker-tooltip::before {
+  border-top-color: rgba(0, 0, 0, 0.8) !important;
+}

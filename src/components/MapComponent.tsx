@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -57,6 +57,9 @@ export default function MapComponent({ umkmData }: MapComponentProps) {
             key={index}
             position={[umkm.coordinates[1], umkm.coordinates[0]]} // [latitude, longitude]
           >
+            <Tooltip permanent direction="top" offset={[0, -10]} className="marker-tooltip">
+              <span className="font-medium capitalize">{umkm.name}</span>
+            </Tooltip>
             <Popup>
               <div className="text-center">
                 <h3 className="font-semibold text-lg capitalize">{umkm.name}</h3>
